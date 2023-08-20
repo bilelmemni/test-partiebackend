@@ -4,7 +4,7 @@ const CommandeSchema = new Schema({
     Livres: [],
     client: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Admin'
+        ref: 'User'
     },
 
 }, { timestamps: true, versionKey: false })

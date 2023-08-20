@@ -20,7 +20,8 @@ const livreSchema = new Schema({
     File: {
         type: String,
         required: [true, 'Ce champs est obligatoire'],
-    }
+    },
+
 
 
 }, { timestamps: true, versionKey: false })

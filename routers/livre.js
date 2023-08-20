@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const authRole = require('../midllwere/verfiyuser')
-const { addlivre, getall, getlivresbycategory, getByIdlivre, deletelivre, updatelivre } = require('../controllers/livre');
+const { addlivre, getall, getlivresbycategory, getByIdlivre, deletelivre, updatelivre, downloadBook } = require('../controllers/livre');
 
 
 //uploads file
@@ -20,12 +20,14 @@ const mystorage = multer.diskStorage({
 const upload = multer({ storage: mystorage })
 
 //CRUD PRODUIT
-router.post('/livre', upload.any('file'), passport.authenticate('bearer', { session: false }), authRole("admin"), addlivre);
-router.get('/livre', passport.authenticate('bearer', { session: false }), authRole("admin", "client"), getall);
-router.get('/livre/:id', passport.authenticate('bearer', { session: false }), authRole("admin", "client"), getByIdlivre);
-router.delete('/livre/:id', passport.authenticate('bearer', { session: false }), authRole("admin"), deletelivre);
+router.post('/livre', upload.any('file'), passport.authenticate('bearer', { session: false }), addlivre);
+router.get('/livre', passport.authenticate('bearer', { session: false }), getall);
+router.get('/livre/:id', passport.authenticate('bearer', { session: false }), getByIdlivre);
+router.delete('/livre/:id', passport.authenticate('bearer', { session: false }), deletelivre);
 router.put('/livre/:id', upload.any('file'), passport.authenticate('bearer', { session: false }), updatelivre);
 router.get('/getProductsbycategory/:id', passport.authenticate('bearer', { session: false }), getlivresbycategory);
+
+router.post('/download', downloadBook);
 
 
 

@@ -74,3 +74,26 @@ exports.getlivresbycategory = async (req, res) => {
     }
 
 }
+
+const monthlyQuota = 5;
+let downloadsLeft = monthlyQuota;
+
+
+exports.downloadBook = (req, res) => {
+    if (downloadsLeft > 0) {
+        downloadsLeft--;
+        monthlyQuota - 1
+        res.json({ message: 'Download successful.' });
+    } else {
+        res.status(403).json({ message: ' downloads reached max 5 downloads in one month' });
+    }
+};
+
+
+
+// function resetDownloads each beginning of the month
+function resetDownloads() {
+    downloadsLeft = monthlyQuota;
+}
+const interval = 30 * 24 * 60 * 60;
+setInterval(resetDownloads, interval);

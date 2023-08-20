@@ -3,7 +3,7 @@ const Commande = require('../models/commande');
 const Livre = require('../models/livre');
 
 
-// API pour passer une commande et Diminuer les quantite des produits
+// API pour passer une commande 
 exports.createCommande = async (req, res) => {
     try {
         let obj = {
